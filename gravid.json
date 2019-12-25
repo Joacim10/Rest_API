@@ -1,1 +1,18 @@
-{}
+[
+    {
+        "value": "salami",
+        "recommendation": "do not use"
+    },
+    {
+        "value": "gravad lax",
+        "recommendation": "do not use"
+    },
+    {
+        "value": "gorgonzola",
+        "recommendation": "do not use"
+    },
+    {
+        "value": "sill",
+        "recommendation": "do not use"
+    }
+]
