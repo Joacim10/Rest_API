@@ -26,6 +26,8 @@ function checkSite(id, url) {
 }
 
 
+//testar om det uppdateras
+
 var top = 100; // STARTPOSITION FÖR ALERTS
 var alerts = [] // LISTA AV ALERTS
 
