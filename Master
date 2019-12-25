@@ -1,0 +1,61 @@
+// ==UserScript==
+// @name         New Userscript
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  try to take over the world!
+// @author       You
+// @match        https://www.tampermonkey.net/index.php?version=4.9&ext=dhdg&updated=true
+// @grant        none
+// @include     *
+// @run-at       document-end
+// ==/UserScript==
+
+
+(function() {
+  'use strict';
+
+  // FETCH API:ER
+function checkSite(id, url) {
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      for (var x of data) {
+        findText(x.value)
+      }
+    });
+}
+
+
+var top = 100; // STARTPOSITION FÖR ALERTS
+var alerts = [] // LISTA AV ALERTS
+
+function findText(text) {
+
+    if (window.find(text) && !alerts.includes(text)) {
+
+      top = top + 45;
+
+    document.body.insertAdjacentHTML(
+              "afterBegin",
+              `
+              <div class="warningDiv" style = "position:fixed; right: 5px; top: ${top}px; background-color: #ffffff90; color:
+              #000000; z-index: 2147483647; border-radius: 1rem">
+              <div style = "position:relative; padding: 0.7rem; font-size: 1rem; font-weight: 600"> ${text} som gravid </div>
+              </div>`
+        );
+        alerts.push(text)
+    }}
+
+  function test() {
+    console.log('test genomförd')
+    checkSite("gravid", "https://raw.githubusercontent.com/Joacim10/Rest_API/master/gravid.json");
+  }
+
+// CHECK-EVENT VID KLICK
+  document.body.addEventListener("click", function(event) {
+  setTimeout(test, 3000);
+});
+
+// CHECK ONLOAD
+  setTimeout(test, 3000);
+})();
