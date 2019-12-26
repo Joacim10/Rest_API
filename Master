@@ -1,18 +1,23 @@
 // ==UserScript==
 // @name         New Userscript
 // @namespace    http://tampermonkey.net/
+// @downloadURL  https://github.com/Joacim10/Rest_API/blob/master/Master
 // @updateURL    https://github.com/Joacim10/Rest_API/blob/master/Master
 // @version      0.1
 // @description  try to take over the world!
 // @author       You
 // @match        https://www.tampermonkey.net/index.php?version=4.9&ext=dhdg&updated=true
-// @grant        none
+// @grant        GM_getResourceText
+// @grant        GM_addStyle
+// @grant        GM_xmlhttpRequest
+// @grant        GM_getResourceURL
+// @grant        GM_xmlhttpRequest
 // @include     *
 // @run-at       document-end
 // ==/UserScript==
 
 
-//DET HÄR SKA UPDATERAS
+//Det här ska updateras
 
 (function() {
   'use strict';
