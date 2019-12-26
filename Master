@@ -1,6 +1,7 @@
 // ==UserScript==
 // @name         New Userscript
 // @namespace    http://tampermonkey.net/
+// @updateURL    https://github.com/Joacim10/Rest_API/blob/master/Master
 // @version      0.1
 // @description  try to take over the world!
 // @author       You
@@ -26,8 +27,6 @@ function checkSite(id, url) {
 }
 
 
-//testar om det uppdateras
-
 var top = 100; // STARTPOSITION FÖR ALERTS
 var alerts = [] // LISTA AV ALERTS
 
@@ -40,7 +39,7 @@ function findText(text) {
     document.body.insertAdjacentHTML(
               "afterBegin",
               `
-              <div class="warningDiv" style = "position:fixed; right: 5px; top: ${top}px; background-color: #ffffff90; color:
+              <div class="warningDiv" style = "position:fixed; right: 5px; top: ${top}px; background-color: #d4af3790; color:
               #000000; z-index: 2147483647; border-radius: 1rem">
               <div style = "position:relative; padding: 0.7rem; font-size: 1rem; font-weight: 600"> ${text} som gravid </div>
               </div>`
@@ -54,10 +53,16 @@ function findText(text) {
   }
 
 // CHECK-EVENT VID KLICK
+
+
+  function events () {
   document.body.addEventListener("click", function(event) {
   setTimeout(test, 3000);
-});
+})}
 
 // CHECK ONLOAD
+  setTimeout(events, 2000);
   setTimeout(test, 3000);
 })();
+
+
