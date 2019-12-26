@@ -1,0 +1,40 @@
+{
+  "(function(){": {
+    "'usestrict';": {}
+  },
+  "function": {
+    "fetch(url)": {
+      "});": {}
+    },
+    "function": {},
+    "}": {},
+    "setTimeout(test,3000);": {}
+  },
+  ".then(res": "> res.json())",
+  ".then(data": "> {",
+  "findText(x.value)": {},
+  "}": {},
+  "var": [
+    {}
+  ],
+  "if(window.find(text) && !alerts.includes(text)) {": {
+    "top": "top + 45;"
+  },
+  "document.body.insertAdjacentHTML(": {},
+  "\"afterBegin\",": {},
+  "`": {},
+  "<div": "\"warningDiv\" style = \"position:fixed; right: 5px; top: ${top}px; background-color: #d4af3790; color:",
+  "#000000;z-index: 2147483647; border-radius: 1rem\">": {},
+  "</div>`": {},
+  ");": {},
+  "alerts.push(text)": {},
+  "}}": {},
+  "console.log('testgenomförd')": {},
+  "checkSite(\"gravid\",\"https://raw.githubusercontent.com/Joacim10/Rest_API/master/gravid.json\");": {},
+  "document.body.addEventListener(\"click\",function(event) {": {},
+  "})}": {
+    "setTimeout(events,2000);": {},
+    "setTimeout(test,3000);": {}
+  },
+  "})();": {}
+}
