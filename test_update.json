@@ -1,3 +1,21 @@
+// ==UserScript==
+// @name         New Userscript
+// @namespace    http://tampermonkey.net/
+// @downloadURL  https://github.com/Joacim10/Rest_API/blob/master/test_update.json
+// @updateURL    https://github.com/Joacim10/Rest_API/blob/master/test_update.json
+// @version      0.2
+// @description  try to take over the world!
+// @author       You
+// @match        https://www.tampermonkey.net/index.php?version=4.9&ext=dhdg&updated=true
+// @grant        GM_getResourceText
+// @grant        GM_addStyle
+// @grant        GM_xmlhttpRequest
+// @grant        GM_getResourceURL
+// @grant        GM_xmlhttpRequest
+// @include     *
+// @run-at       document-end
+// ==/UserScript==
+
 {
   "(function(){": {
     "'usestrict';": {}
