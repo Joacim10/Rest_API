@@ -1,9 +1,7 @@
 // ==UserScript==
 // @name         New Userscript
 // @namespace    http://tampermonkey.net/
-// @downloadURL  https://github.com/Joacim10/Rest_API/blob/master/Master
-// @updateURL    https://github.com/Joacim10/Rest_API/blob/master/Master
-// @version      0.2
+// @version      0.3
 // @description  try to take over the world!
 // @author       You
 // @match        https://www.tampermonkey.net/index.php?version=4.9&ext=dhdg&updated=true
@@ -17,59 +15,191 @@
 // ==/UserScript==
 
 
-//Det här ska updateras
-
 (function() {
   'use strict';
 
-  // FETCH API:ER
-function checkSite(id, url) {
-  fetch(url)
-    .then(res => res.json())
-    .then(data => {
-      for (var x of data) {
-        findText(x.value)
-      }
-    });
-}
+  // FETCH API:ER SOM OFTA INTE FUNKAR PGA SECURITY POLICY
+// function checkSite(id, url) {
+//  fetch(url)
+//    .then(res => res.json())
+//    .then(data => {
+ //     for (var x of data) {
+//        findText(x.value)
+//      }
+//    });
+// }
 
-
-var top = 100; // STARTPOSITION FÖR ALERTS
+function runAllAtOnce() {
+var moveNextAlertDown = 45;
 var alerts = [] // LISTA AV ALERTS
+var habanero = false
 
-function findText(text) {
+
+function findText(text, recomendation, publisher) {
+
+    if (alerts.includes(text)) {console.log('en alert har redan skapats')}
 
     if (window.find(text) && !alerts.includes(text)) {
 
-      top = top + 45;
+        if (habanero === false) {
 
-    document.body.insertAdjacentHTML(
-              "afterBegin",
-              `
-              <div class="warningDiv" style = "position:fixed; right: 5px; top: ${top}px; background-color: #d4af3790; color:
-              #000000; z-index: 2147483647; border-radius: 1rem">
-              <div style = "position:relative; padding: 0.7rem; font-size: 1rem; font-weight: 600"> ${text} som gravid </div>
-              </div>`
-        );
-        alerts.push(text)
-    }}
+    document.body.insertAdjacentHTML("beforeEnd",`
 
-  function test() {
-    console.log('test genomförd')
-    checkSite("gravid", "https://raw.githubusercontent.com/Joacim10/Rest_API/master/gravid.json");
-  }
+     <div id="habanero" class="warningDiv" style ="position: fixed; right: 18px; top: 120px; z-index: 2147483647; border-radius: 50%">
+       <button id="dropdownButton" class="dropbtn" style="width: 3vw; height: 3vw; background-color: #ff0000; border: none; border-radius: 50%; padding: 0; vertical-align: middle; background-color: #3498DB; color: white; padding: 16px; font-size: 16px; cursor: pointer" type="button">
+         <img id="dropdownImage" style="width: 3vw; height: auto; border-radius: 50%; padding: 0; vertical-align: middle" class="icon-circled icon-bglight" src="https://www.chillisoft.co.za/wp-content/uploads/2016/04/Habanero-1.jpg" alt="">
+       </button>
 
-// CHECK-EVENT VID KLICK
+       <div id="mydropdown" class="dropdown-content" style="display: none">
+       </div>
+
+     </div>
+    `);
+
+    }
+
+     habanero = true;
+     alerts.push(text)
+
+     document.getElementById('mydropdown').insertAdjacentHTML("beforeEnd",`
+
+       <div class="warningDiv" style = "position: absolute; top: ${moveNextAlertDown}px; right: 5px; color: #fffff; z-index: 2147483647; border-radius: 1rem">
+       <div style = "position: relative; font-size: 16px; font-weight: 600; font-family: Arial, Helvetica, sans-serif; color: #504f54; line-height: 0.9;"> ${text} - ${recomendation} ${publisher} </div>
+       </div>
+     `)
+
+     moveNextAlertDown = moveNextAlertDown + 40;
+    
+     //document.getElementById('habanero').addEventListener("click", openDropDownList);
+     //document.getElementById('habanero').addEventListener("focus", focusFunction)
 
 
-  function events () {
+
+     console.log('har hittat ' + text +'!!!!!!')
+
+}}
+
+
+function test() {
+
+    var itemsInSession = sessionStorage.getItem('itemCount')
+
+       console.log('har hittat ' + (Number(itemsInSession)+1) + ' ord i session storage')
+
+      for (var i = 0; i <= itemsInSession; i++) {
+         console.log('test påbörjad för ' + JSON.parse(sessionStorage.getItem(i))[0] + '...')
+
+          findText (JSON.parse(sessionStorage.getItem(i))[0],JSON.parse(sessionStorage.getItem(i))[1],JSON.parse(sessionStorage.getItem(i))[2])
+         // findText (sessionStorage.getItem(i))
+
+      }
+}
+
+
+
+
+
+ // CHECK-EVENT VID KLICK
+function events (event) {
   document.body.addEventListener("click", function(event) {
-  setTimeout(test, 3000);
+
+           console.log('Har det klickats på något som sätter igång test? = ')
+           console.log(!(event.target.matches('INPUT')) && !(event.target.closest('.warningDiv')))
+
+      if (event.target.closest('.warningDiv')) {
+         openDropDownList(event)
+      }
+
+      if (event.target.closest('#habanero')) {
+            event.target.parentNode.blur();
+            event.target.parentNode.parentNode.blur();
+      }
+
+      if (!(event.target.closest('INPUT')) && !(event.target.closest('.warningDiv'))) {
+        setTimeout(test, 2500);
+      }
+
 })}
 
-// CHECK ONLOAD
-  setTimeout(events, 2000);
-  setTimeout(test, 3000);
+setTimeout(events, 4000);
+
+ // CHECK ON LOAD
+setTimeout(test, 4000);
+
+
+
+
+
+
+// DROPDOWN MENY
+   //tar bort menyn om man klickar utanför
+window.onclick = function(event) {
+ if (document.getElementById('dropdownButton').contains(event.target)){
+  } else{
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+
+      if (openDropdown.style.display === "block") {
+        openDropdown.style.display = "none";
+      }
+    }
+  }
+};
+
+function openDropDownList(e) {
+   e.preventDefault();
+   //this.blur();
+
+   var dropdowns = document.getElementsByClassName("dropdown-content");
+   var i;
+
+   for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+
+        if (openDropdown.style.display === "block") {
+          openDropdown.style.display = "none";
+        } else {
+          openDropdown.style.display = "block";
+        }
+    }
+}
+
+
+
+
+
+
+// GREASY FORK CODE
+function testButton () {
+  var testedButton = document.querySelector("#install-area > a.install-link").innerHTML.includes('Reinstall')
+
+    if (testedButton === true) {
+        setTimeout(closeWindow, 100);
+    } else {
+        pressButton()
+    }
+}
+
+function pressButton () {
+  document.querySelector("#install-area > a.install-link").click()
+    setTimeout(closeWindow, 1000);
+}
+
+function closeWindow () {
+  window.close('https://greasyfork.org/en/scripts/394274-arrayofwordstomatch');
+}
+
+console.log(window.location.href)
+
+if ((window.location.href === 'https://greasyfork.org/en/scripts/394272-new-userscript/code') || (window.location.href === 'https://greasyfork.org/en/scripts/394274-arrayofwordstomatch'))
+{
+   setTimeout(testButton, 1000)
+}
+
+}
+
+runAllAtOnce()
+
 })();
-
-
