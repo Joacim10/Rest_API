@@ -1,0 +1,73 @@
+// ==UserScript==
+// @name         arrayOfWordsToMatch
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  try to take over the world!
+// @author       You
+// @match        https://greasyfork.org/en/script_versions/new
+// @grant        GM_getResourceText
+// @grant        GM_addStyle
+// @grant        GM_xmlhttpRequest
+// @grant        GM_getResourceURL
+// @grant        GM_xmlhttpRequest
+// @include     *
+// @run-at       document-start
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+   // sessionStorage.clear();
+
+   var arrayOfWords = [['Gorgonzola','ät inte det här', 'Hälsovårdverket'],['Salami','ät inte', 'Hälsovårdverket'],['Sill','undvik', 'Hälsovårdverket'],
+                       ['Broccoli','ät', 'Hälsovårdverket'],['Gurka','är bra', 'Hälsovårdverket'],['Blomkål','ät gärna', 'Hälsovårdverket']]
+
+   var itemCount = Number(sessionStorage.getItem('itemCount'))
+
+   console.log('Försöker placera ' + arrayOfWords.length + ' ord i session storage')
+   //console.log('Finns en lista med ' + itemCount.length() + ' ord i sessions storage')
+
+
+for (var x of arrayOfWords) {
+
+    // console.log('session storage length =' + sessionStorage.getItem('itemCount'))
+
+    var alreadyInSession = 0;
+    //check if a word already exist in session storage
+  if (itemCount !== 0) {
+      for (var i = 0; i <= itemCount; i++) {
+           if (x === sessionStorage.getItem(i)) {
+              alreadyInSession = alreadyInSession + 1;
+           }
+      }
+
+      if (alreadyInSession === 0) {
+          console.log(x + ' finns INTE i session storage')
+          sessionStorage.setItem('itemCount', itemCount);
+
+
+          sessionStorage.setItem(itemCount, JSON.stringify(x))
+          //sessionStorage.setItem(itemCount, x)
+
+
+          console.log('itemCount =' + itemCount)
+          itemCount = itemCount + 1
+      } else {
+        console.log(x + ' finns redan i session storage')
+      }
+  } else {
+      sessionStorage.setItem('itemCount', itemCount);
+
+
+      sessionStorage.setItem(itemCount, JSON.stringify(x))
+      //sessionStorage.setItem(itemCount, x)
+
+
+      console.log(x + ' finns INTE i session storage, första i session storage')
+      console.log('itemCount =' + itemCount)
+      itemCount = 1;
+
+}
+}
+
+})();
