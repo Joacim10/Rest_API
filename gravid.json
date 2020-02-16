@@ -1,18 +1,1 @@
-[
-    {
-        "value": "salami",
-        "recommendation": "do not use"
-    },
-    {
-        "value": "gravad lax",
-        "recommendation": "do not use"
-    },
-    {
-        "value": "gorgonzola",
-        "recommendation": "do not use"
-    },
-    {
-        "value": "sill",
-        "recommendation": "do not use"
-    }
-]
+[["salami","do not use","unionen","https://www.livsmedelsverket.se/matvanor-halsa--miljo/kostrad-och-matvanor/ammande/"],["gravad lax","do not use","unionen","https://www.livsmedelsverket.se/matvanor-halsa--miljo/kostrad-och-matvanor/ammande/"],["gorgonzola","do not use","livsmedelsverket","https://www.livsmedelsverket.se/matvanor-halsa--miljo/kostrad-och-matvanor/ammande/"],["sill","do not use","mecenat","https://www.livsmedelsverket.se/matvanor-halsa--miljo/kostrad-och-matvanor/ammande/"]]
